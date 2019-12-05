@@ -81,8 +81,8 @@ DO
         IF screenx <> VAL(screenx$) OR screeny <> VAL(screeny$) THEN
             screenx = VAL(screenx$)
             screeny = VAL(screeny$)
+            SCREEN _NEWIMAGE(screenx, screeny)
         END IF
-        SCREEN _NEWIMAGE(screenx, screeny)
     END IF
 LOOP UNTIL test$ = ""
 
