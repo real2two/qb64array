@@ -7,7 +7,7 @@ _FONT 16
 _PRINTMODE _FILLBACKGROUND
 COLOR &HFFFFFFFF, &HFF000000
 
-array$ = "image#images\icon.png#50#50#text#hi#FFFF00#none#fonts\Alatsi-Regular.ttf#20#200#200#sound#sound\sound.ogg#title#test" ' Set the array.
+array$ = "screen#300#300#image#images\icon.png#50#50#text#hi#FFFF00#none#fonts\Alatsi-Regular.ttf#20#200#200#sound#sound\sound.ogg#title#test" ' Set the array.
 
 ' ============
 ' Array Reader
@@ -82,6 +82,7 @@ DO
             screenx = VAL(screenx$)
             screeny = VAL(screeny$)
         END IF
+        SCREEN _NEWIMAGE(screenx, screeny)
     END IF
 LOOP UNTIL test$ = ""
 
