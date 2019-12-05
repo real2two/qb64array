@@ -5,9 +5,9 @@ screeny = 500
 
 _FONT 16
 _PRINTMODE _FILLBACKGROUND
-COLOR VAL("&HFFffffff"), VAL("&HFF000000")
+COLOR &HFFFFFFFF, &HFF000000
 
-array$ = "image?images\icon.png?50?50|text?hi?FFFF00?none?fonts\Alatsi-Regular.ttf?20?200?200|sound?sound\sound.ogg|title?test" ' Set the array.
+array$ = "image#images\icon.png#50#50#text#hi#FFFF00#none#fonts\Alatsi-Regular.ttf#20#200#200#sound#sound\sound.ogg#title#test" ' Set the array.
 
 ' ============
 ' Array Reader
@@ -15,14 +15,14 @@ array$ = "image?images\icon.png?50?50|text?hi?FFFF00?none?fonts\Alatsi-Regular.t
 test$ = array$ ' Sets the test variable.
 
 DO
-    CALL loopUntil(test$, "?", type$)
+    CALL loopUntil(test$, "#", type$)
     IF type$ = "" GOTO endLoop
     IF type$ = "image" THEN
-        CALL loopUntil(test$, "?", image$)
+        CALL loopUntil(test$, "#", image$)
         IF image$ = "" GOTO endLoop
-        CALL loopUntil(test$, "?", x$)
+        CALL loopUntil(test$, "#", x$)
         IF x$ = "" GOTO endLoop
-        CALL loopUntil(test$, "|", y$)
+        CALL loopUntil(test$, "#", y$)
         IF y$ = "" GOTO endLoop
         image& = _LOADIMAGE(image$, 32)
         IF image& < -1 THEN
@@ -31,19 +31,19 @@ DO
         ELSE SYSTEM
         END IF
     ELSEIF type$ = "text" THEN
-        CALL loopUntil(test$, "?", text$)
+        CALL loopUntil(test$, "#", text$)
         IF text$ = "" GOTO endLoop
-        CALL loopUntil(test$, "?", fgcolor$)
+        CALL loopUntil(test$, "#", fgcolor$)
         IF fgcolor$ = "" GOTO endLoop
-        CALL loopUntil(test$, "?", bgcolor$)
+        CALL loopUntil(test$, "#", bgcolor$)
         IF bgcolor$ = "" GOTO endLoop
-        CALL loopUntil(test$, "?", font$)
+        CALL loopUntil(test$, "#", font$)
         IF font$ = "" GOTO endLoop
-        CALL loopUntil(test$, "?", fontsize$)
+        CALL loopUntil(test$, "#", fontsize$)
         IF fontsize$ = "" GOTO endLoop
-        CALL loopUntil(test$, "?", x$)
+        CALL loopUntil(test$, "#", x$)
         IF x$ = "" GOTO endLoop
-        CALL loopUntil(test$, "|", y$)
+        CALL loopUntil(test$, "#", y$)
         IF y$ = "" GOTO endLoop
         IF bgcolor$ = "none" THEN
             _PRINTMODE _KEEPBACKGROUND
@@ -61,22 +61,22 @@ DO
         ELSE SYSTEM
         END IF
         _PRINTMODE _FILLBACKGROUND
-        COLOR VAL("&HFFffffff"), VAL("&HFF000000")
+        COLOR &HFFFFFFFF, &HFF000000
     ELSEIF type$ = "sound" THEN
-        CALL loopUntil(test$, "|", sound$)
+        CALL loopUntil(test$, "#", sound$)
         IF sound$ = "" GOTO endLoop
         s& = _SNDOPEN(sound$)
         IF s& = 0 THEN SYSTEM
         _SNDPLAY s&
         _SNDCLOSE s&
     ELSEIF type$ = "title" THEN
-        CALL loopUntil(test$, "|", title$)
+        CALL loopUntil(test$, "#", title$)
         IF title$ = "" GOTO endLoop
         _TITLE title$
     ELSEIF type$ = "screen" THEN
-        CALL loopUntil(test$, "|", screenx$)
+        CALL loopUntil(test$, "#", screenx$)
         IF screenx$ = "" GOTO endLoop
-        CALL loopUntil(test$, "|", screeny$)
+        CALL loopUntil(test$, "#", screeny$)
         IF screeny$ = "" GOTO endLoop
         IF screenx <> VAL(screenx$) OR screeny <> VAL(screeny$) THEN
             screenx = VAL(screenx$)
